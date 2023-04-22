@@ -8,6 +8,7 @@ size = Vector2(160, 32)
 
 [node name="Paddle" type="CharacterBody2D"]
 position = Vector2(594, 586)
+motion_mode = 1
 script = ExtResource("1_b4wf5")
 
 [node name="Block1" type="Sprite2D" parent="."]
