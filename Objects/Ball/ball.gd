@@ -28,5 +28,6 @@ func _physics_process(delta):
 				velocity.x = ratio * 8
 		if lastSlideCollision.get_collider().is_in_group("Blocks"):
 			var block: Node = lastSlideCollision.get_collider()
-			block.queue_free() # add points
+			block.queue_free()
+			# add points
 		

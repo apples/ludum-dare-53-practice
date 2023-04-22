@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://cletj2qpvvhrh"]
 
+[ext_resource type="Script" path="res://Scenes/GamePlay.gd" id="1_ee06h"]
 [ext_resource type="Texture2D" uid="uid://cgydpe4w2088r" path="res://assets/background.png" id="1_nfjbq"]
 [ext_resource type="PackedScene" uid="uid://df72htnuf4u8m" path="res://Objects/Paddle/paddle.tscn" id="2_rcsaq"]
 [ext_resource type="PackedScene" uid="uid://cilbjl4rld0d5" path="res://Objects/Ball/ball.tscn" id="3_7qeyh"]
-[ext_resource type="PackedScene" uid="uid://hwsxfp8fm7n1" path="res://Objects/Block/block.tscn" id="4_pxolc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4q7vs"]
 size = Vector2(0.5, 40.5313)
@@ -12,6 +12,7 @@ size = Vector2(0.5, 40.5313)
 size = Vector2(72, 0.21875)
 
 [node name="GamePlay" type="Node2D"]
+script = ExtResource("1_ee06h")
 
 [node name="Background" type="TextureRect" parent="."]
 texture_filter = 1
@@ -40,6 +41,3 @@ shape = SubResource("RectangleShape2D_jk7ns")
 [node name="Ball" parent="." instance=ExtResource("3_7qeyh")]
 position = Vector2(593, 311)
 scale = Vector2(2, 2)
-
-[node name="Block" parent="." instance=ExtResource("4_pxolc")]
-position = Vector2(591, 200)
