@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://cletj2qpvvhrh"]
+
+[ext_resource type="Texture2D" uid="uid://cgydpe4w2088r" path="res://assets/background.png" id="1_nfjbq"]
+[ext_resource type="PackedScene" uid="uid://df72htnuf4u8m" path="res://Objects/Paddle/paddle.tscn" id="2_rcsaq"]
+[ext_resource type="PackedScene" uid="uid://cilbjl4rld0d5" path="res://Objects/Ball/ball.tscn" id="3_7qeyh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4q7vs"]
+size = Vector2(0.5, 40.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jk7ns"]
+size = Vector2(71, 0.3125)
+
+[node name="GamePlay" type="Node2D"]
+
+[node name="Background" type="TextureRect" parent="."]
+texture_filter = 1
+offset_right = 72.0
+offset_bottom = 41.0
+scale = Vector2(16, 16)
+texture = ExtResource("1_nfjbq")
+stretch_mode = 1
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Background"]
+
+[node name="Left Wall" type="CollisionShape2D" parent="Background/StaticBody2D"]
+position = Vector2(0.25, 20.25)
+shape = SubResource("RectangleShape2D_4q7vs")
+
+[node name="Right Wall" type="CollisionShape2D" parent="Background/StaticBody2D"]
+position = Vector2(71.75, 20.25)
+shape = SubResource("RectangleShape2D_4q7vs")
+
+[node name="Ceiling" type="CollisionShape2D" parent="Background/StaticBody2D"]
+position = Vector2(36, 0.15625)
+shape = SubResource("RectangleShape2D_jk7ns")
+
+[node name="Paddle" parent="." instance=ExtResource("2_rcsaq")]
+motion_mode = 1
+
+[node name="Ball" parent="." instance=ExtResource("3_7qeyh")]
+position = Vector2(593, 311)
+scale = Vector2(2, 2)
