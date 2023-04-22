@@ -10,6 +10,7 @@ func _ready():
 	var directionY = 1 #randf_range(0.1, 1)
 	var direction = Vector2(directionX, directionY)
 	velocity = direction * SPEED
+	$Sprite.play("idle")
 
 func _physics_process(delta):
 	move_and_slide()
