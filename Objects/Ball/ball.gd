@@ -19,11 +19,14 @@ func _physics_process(delta):
 		velocity = velocity.bounce(lastSlideCollision.get_normal())
 		
 		if lastSlideCollision.get_collider().name == "Paddle":
-			var paddle = lastSlideCollision.get_collider()
+			var paddle: Node = lastSlideCollision.get_collider()
 			if self.global_position.x < paddle.global_position.x:
 				var ratio = paddle.global_position.x - self.global_position.x
 				velocity.x = ratio * -8
 			if self.global_position.x > paddle.global_position.x:
 				var ratio = self.global_position.x - paddle.global_position.x
 				velocity.x = ratio * 8
+		if lastSlideCollision.get_collider().is_in_group("Blocks"):
+			var block: Node = lastSlideCollision.get_collider()
+			block.queue_free() # add points
 		
