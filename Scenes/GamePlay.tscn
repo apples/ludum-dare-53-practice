@@ -41,3 +41,5 @@ shape = SubResource("RectangleShape2D_jk7ns")
 [node name="Ball" parent="." instance=ExtResource("3_7qeyh")]
 position = Vector2(593, 311)
 scale = Vector2(2, 2)
+
+[connection signal="block_destroyed" from="Ball" to="." method="_on_ball_block_destroyed"]

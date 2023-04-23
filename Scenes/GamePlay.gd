@@ -1,6 +1,6 @@
 extends Node2D
 var block_scene = preload("res://Objects/Block/block.tscn")
-
+var number_of_blocks: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -21,6 +21,7 @@ func render_blocks():
 			block.set_position(block_position)
 			if row_pattern[i]:
 				self.add_child(block)
+				number_of_blocks += 1
 			block_position.x += 105
 
 func row_pattern():
@@ -39,7 +40,12 @@ func row_pattern():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if number_of_blocks == 0:
+		render_blocks()
 
 func coin_flip():
 	return randi_range(0, 1)
+
+
+func _on_ball_block_destroyed():
+	number_of_blocks -= 1
