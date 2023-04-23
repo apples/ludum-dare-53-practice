@@ -26,3 +26,13 @@ texture = ExtResource("2_jlsl7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_67ixp")
+
+[node name="GunPowerUpTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[node name="BulletInterval" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="timeout" from="GunPowerUpTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="BulletInterval" to="." method="_on_bullet_interval_timeout"]

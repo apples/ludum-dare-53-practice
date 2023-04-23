@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://dltkirn4g75uq"]
+
+[ext_resource type="Script" path="res://Objects/Bullet/bullet.gd" id="1_0tc5a"]
+[ext_resource type="Texture2D" uid="uid://bqvs34aflm0ur" path="res://assets/shoot.png" id="1_dx3cj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_57a3g"]
+size = Vector2(4, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1iyu6"]
+size = Vector2(4, 12)
+
+[node name="Bullet" type="CharacterBody2D"]
+position = Vector2(-594, -586)
+scale = Vector2(2, 2)
+script = ExtResource("1_0tc5a")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("1_dx3cj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_57a3g")
+disabled = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_1iyu6")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
