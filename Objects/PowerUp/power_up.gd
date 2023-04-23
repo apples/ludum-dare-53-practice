@@ -1,6 +1,6 @@
 extends CharacterBody2D
 signal power_up_collected()
-const SPEED = 300.0
+const SPEED = 150
 
 func _ready():
 	var directionX = 0
