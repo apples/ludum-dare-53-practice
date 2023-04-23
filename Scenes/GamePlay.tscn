@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cletj2qpvvhrh"]
+[gd_scene load_steps=8 format=3 uid="uid://cletj2qpvvhrh"]
 
 [ext_resource type="Script" path="res://Scenes/GamePlay.gd" id="1_ee06h"]
 [ext_resource type="Texture2D" uid="uid://cgydpe4w2088r" path="res://assets/background.png" id="1_nfjbq"]
@@ -11,6 +11,9 @@ size = Vector2(0.5, 40.5313)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jk7ns"]
 size = Vector2(72, 0.21875)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3wnsy"]
+size = Vector2(1.40826, 0.342757)
+
 [node name="GamePlay" type="Node2D"]
 script = ExtResource("1_ee06h")
 
@@ -22,22 +25,41 @@ scale = Vector2(16, 16)
 texture = ExtResource("1_nfjbq")
 stretch_mode = 1
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Background"]
+[node name="Walls" type="StaticBody2D" parent="Background"]
 
-[node name="Left Wall" type="CollisionShape2D" parent="Background/StaticBody2D"]
+[node name="Left Wall" type="CollisionShape2D" parent="Background/Walls"]
 position = Vector2(-0.25, 20.2813)
 shape = SubResource("RectangleShape2D_4q7vs")
 
-[node name="Right Wall" type="CollisionShape2D" parent="Background/StaticBody2D"]
+[node name="Right Wall" type="CollisionShape2D" parent="Background/Walls"]
 position = Vector2(72.25, 20.2656)
 shape = SubResource("RectangleShape2D_4q7vs")
 
-[node name="Ceiling" type="CollisionShape2D" parent="Background/StaticBody2D"]
+[node name="Ceiling" type="CollisionShape2D" parent="Background/Walls"]
 position = Vector2(36, -0.109375)
 shape = SubResource("RectangleShape2D_jk7ns")
+
+[node name="DeathPlane" type="Area2D" parent="Background"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Background/DeathPlane"]
+position = Vector2(35.9375, 40.75)
+scale = Vector2(51.0839, -1.21869)
+shape = SubResource("RectangleShape2D_3wnsy")
 
 [node name="Paddle" parent="." instance=ExtResource("2_rcsaq")]
 
 [node name="Ball" parent="." instance=ExtResource("3_7qeyh")]
 position = Vector2(593, 311)
 scale = Vector2(2, 2)
+
+[node name="BlockContainer" type="Node2D" parent="."]
+
+[node name="LivesLabel" type="Label" parent="."]
+unique_name_in_owner = true
+offset_right = 57.0
+offset_bottom = 26.0
+scale = Vector2(4, 4)
+text = "Lives: 3"
+
+[connection signal="body_entered" from="Background/DeathPlane" to="." method="_on_death_plane_body_entered"]
+[connection signal="block_destroyed" from="Ball" to="." method="_on_ball_block_destroyed"]

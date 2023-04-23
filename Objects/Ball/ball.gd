@@ -1,5 +1,5 @@
 extends CharacterBody2D
-
+signal block_destroyed()
 
 const SPEED = 300
 
@@ -10,6 +10,7 @@ func _ready():
 	var directionY = 1 #randf_range(0.1, 1)
 	var direction = Vector2(directionX, directionY)
 	velocity = direction * SPEED
+	$Sprite.play("idle")
 
 func _physics_process(delta):
 	move_and_slide()
@@ -29,5 +30,6 @@ func _physics_process(delta):
 		if lastSlideCollision.get_collider().is_in_group("Blocks"):
 			var block: Node = lastSlideCollision.get_collider()
 			block.queue_free()
+			block_destroyed.emit()
 			# add points
 		
