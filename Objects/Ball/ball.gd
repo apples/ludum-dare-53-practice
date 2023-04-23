@@ -4,12 +4,7 @@ signal block_destroyed()
 const SPEED = 300
 
 func _ready():
-	# Refresh the seed.
-	randomize()
-	var directionX = randf_range(-1, 1)
-	var directionY = 1 #randf_range(0.1, 1)
-	var direction = Vector2(directionX, directionY)
-	velocity = direction * SPEED
+	$Timer.start()
 	$Sprite.play("idle")
 
 func _physics_process(delta):
@@ -32,4 +27,11 @@ func _physics_process(delta):
 			block.queue_free()
 			block_destroyed.emit()
 			# add points
-		
+
+func _on_timer_timeout():
+	# Refresh the seed.
+	randomize()
+	var directionX = randf_range(-1, 1)
+	var directionY = 1 #randf_range(0.1, 1)
+	var direction = Vector2(directionX, directionY)
+	velocity = direction * SPEED

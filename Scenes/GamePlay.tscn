@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://cletj2qpvvhrh"]
+[gd_scene load_steps=7 format=3 uid="uid://cletj2qpvvhrh"]
 
 [ext_resource type="Script" path="res://Scenes/GamePlay.gd" id="1_ee06h"]
 [ext_resource type="Texture2D" uid="uid://cgydpe4w2088r" path="res://assets/background.png" id="1_nfjbq"]
 [ext_resource type="PackedScene" uid="uid://df72htnuf4u8m" path="res://Objects/Paddle/paddle.tscn" id="2_rcsaq"]
-[ext_resource type="PackedScene" uid="uid://cilbjl4rld0d5" path="res://Objects/Ball/ball.tscn" id="3_7qeyh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4q7vs"]
 size = Vector2(0.5, 40.5313)
@@ -48,9 +47,6 @@ shape = SubResource("RectangleShape2D_3wnsy")
 
 [node name="Paddle" parent="." instance=ExtResource("2_rcsaq")]
 
-[node name="Ball" parent="." groups=["Balls"] instance=ExtResource("3_7qeyh")]
-position = Vector2(588, 316)
-
 [node name="BlockContainer" type="Node2D" parent="."]
 
 [node name="LivesLabel" type="Label" parent="."]
@@ -61,4 +57,3 @@ scale = Vector2(4, 4)
 text = "Lives: 3"
 
 [connection signal="body_entered" from="Background/DeathPlane" to="." method="_on_death_plane_body_entered"]
-[connection signal="block_destroyed" from="Ball" to="." method="_on_ball_block_destroyed"]

@@ -45,9 +45,7 @@ func reset_ball():
 	var ball_pos = Vector2(600, 300)
 	new_ball.set_position(ball_pos)
 	new_ball.block_destroyed.connect(_on_ball_block_destroyed)
-	new_ball.add_to_group("Balls")
 	self.add_child(new_ball)
-	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jn36n"]
 size = Vector2(16, 16)
 
-[node name="Ball" type="CharacterBody2D"]
+[node name="Ball" type="CharacterBody2D" groups=["Balls"]]
 scale = Vector2(2, 2)
 motion_mode = 1
 script = ExtResource("1_e8k87")
@@ -15,7 +15,13 @@ script = ExtResource("1_e8k87")
 texture_filter = 1
 sprite_frames = ExtResource("2_655ir")
 animation = &"idle"
-frame_progress = 0.23188
+frame_progress = 0.228838
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_jn36n")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
