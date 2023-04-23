@@ -21,7 +21,6 @@ frame_progress = 0.228838
 shape = SubResource("RectangleShape2D_jn36n")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 2.0
 one_shot = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

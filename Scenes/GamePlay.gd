@@ -68,12 +68,18 @@ func _on_block_destroyed(block_pos):
 	number_of_blocks -= 1
 	score += 50
 	score_label.text = "Score: %s" %[str(score)]
-	var power_up: CharacterBody2D = power_up_scene.instantiate()
-	power_up.set_position(block_pos)
-	self.add_child(power_up)
+	var chance_drop = randi_range(0, 4)
+	if chance_drop == 3:
+		var power_up: CharacterBody2D = power_up_scene.instantiate()
+		power_up.power_up_collected.connect(_on_power_up_collected)
+		power_up.set_position(block_pos)
+		self.add_child(power_up)
 
 func _on_death_plane_body_entered(body):
 	if body.is_in_group("Balls"):
 		lives -= 1
 		lives_label.text = "Lives: %s" %[str(lives)]
 		reset_ball()
+
+func _on_power_up_collected():
+	reset_ball() # need call deferred here
