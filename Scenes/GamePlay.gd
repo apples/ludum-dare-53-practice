@@ -4,6 +4,7 @@ var new_ball: CharacterBody2D
 var ball_scene = preload("res://Objects/Ball/ball.tscn")
 var block_scene = preload("res://Objects/Block/block.tscn")
 var number_of_blocks: int = 0
+var lives: int = 3
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -65,5 +66,6 @@ func _on_block_destroyed():
 
 func _on_death_plane_body_entered(body):
 	if body.is_in_group("Balls"):
-		lives_label.text = "Lives: 2"
+		lives -= 1
+		lives_label.text = "Lives: %s" %[str(lives)]
 		reset_ball()
