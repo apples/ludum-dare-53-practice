@@ -4,6 +4,7 @@ extends Node2D
 var new_ball: CharacterBody2D
 var ball_scene = preload("res://Objects/Ball/ball.tscn")
 var block_scene = preload("res://Objects/Block/block.tscn")
+var power_up_scene = preload("res://Objects/PowerUp/power_up.tscn")
 var number_of_blocks: int = 0
 var lives: int = 3
 var score: int = 0
@@ -63,10 +64,13 @@ func load_level():
 func coin_flip():
 	return randi_range(0, 1)
 
-func _on_block_destroyed():
+func _on_block_destroyed(block_pos):
 	number_of_blocks -= 1
 	score += 50
 	score_label.text = "Score: %s" %[str(score)]
+	var power_up: CharacterBody2D = power_up_scene.instantiate()
+	power_up.set_position(block_pos)
+	self.add_child(power_up)
 
 func _on_death_plane_body_entered(body):
 	if body.is_in_group("Balls"):
