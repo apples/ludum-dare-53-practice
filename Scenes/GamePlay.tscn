@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cletj2qpvvhrh"]
+[gd_scene load_steps=8 format=3 uid="uid://cletj2qpvvhrh"]
 
 [ext_resource type="Script" path="res://Scenes/GamePlay.gd" id="1_ee06h"]
-[ext_resource type="Texture2D" uid="uid://cgydpe4w2088r" path="res://assets/background.png" id="1_nfjbq"]
+[ext_resource type="Texture2D" uid="uid://dp3ofvvk4xxut" path="res://assets/background_1 .png" id="2_40itq"]
 [ext_resource type="PackedScene" uid="uid://df72htnuf4u8m" path="res://Objects/Paddle/paddle.tscn" id="2_rcsaq"]
+[ext_resource type="FontFile" uid="uid://d1yiskm0tggiw" path="res://fonts/Silver_nodescent.ttf" id="4_0121d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4q7vs"]
 size = Vector2(0.5, 40.5313)
@@ -18,32 +19,11 @@ script = ExtResource("1_ee06h")
 
 [node name="Background" type="TextureRect" parent="."]
 texture_filter = 1
-offset_right = 72.0
-offset_bottom = 41.0
-scale = Vector2(16, 16)
-texture = ExtResource("1_nfjbq")
+offset_right = 288.0
+offset_bottom = 162.0
+scale = Vector2(4, 4)
+texture = ExtResource("2_40itq")
 stretch_mode = 1
-
-[node name="Walls" type="StaticBody2D" parent="Background"]
-
-[node name="Left Wall" type="CollisionShape2D" parent="Background/Walls"]
-position = Vector2(-0.25, 20.2813)
-shape = SubResource("RectangleShape2D_4q7vs")
-
-[node name="Right Wall" type="CollisionShape2D" parent="Background/Walls"]
-position = Vector2(72.25, 20.2656)
-shape = SubResource("RectangleShape2D_4q7vs")
-
-[node name="Ceiling" type="CollisionShape2D" parent="Background/Walls"]
-position = Vector2(36, -0.109375)
-shape = SubResource("RectangleShape2D_jk7ns")
-
-[node name="DeathPlane" type="Area2D" parent="Background"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Background/DeathPlane"]
-position = Vector2(35.9375, 40.75)
-scale = Vector2(51.0839, -1.21869)
-shape = SubResource("RectangleShape2D_3wnsy")
 
 [node name="Paddle" parent="." instance=ExtResource("2_rcsaq")]
 
@@ -51,9 +31,37 @@ shape = SubResource("RectangleShape2D_3wnsy")
 
 [node name="LivesLabel" type="Label" parent="."]
 unique_name_in_owner = true
+texture_filter = 1
 offset_right = 57.0
 offset_bottom = 26.0
 scale = Vector2(4, 4)
+theme_override_fonts/font = ExtResource("4_0121d")
+theme_override_font_sizes/font_size = 19
 text = "Lives: 3"
 
-[connection signal="body_entered" from="Background/DeathPlane" to="." method="_on_death_plane_body_entered"]
+[node name="Walls" type="StaticBody2D" parent="."]
+position = Vector2(0, 11)
+scale = Vector2(16, 16)
+
+[node name="Left Wall" type="CollisionShape2D" parent="Walls"]
+position = Vector2(-0.25, 20.2813)
+shape = SubResource("RectangleShape2D_4q7vs")
+
+[node name="Right Wall" type="CollisionShape2D" parent="Walls"]
+position = Vector2(72.25, 20.2656)
+shape = SubResource("RectangleShape2D_4q7vs")
+
+[node name="Ceiling" type="CollisionShape2D" parent="Walls"]
+position = Vector2(36, -0.109375)
+shape = SubResource("RectangleShape2D_jk7ns")
+
+[node name="DeathPlane" type="Area2D" parent="."]
+position = Vector2(0, 11)
+scale = Vector2(16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathPlane"]
+position = Vector2(35.9375, 40.75)
+scale = Vector2(51.0839, -1.21869)
+shape = SubResource("RectangleShape2D_3wnsy")
+
+[connection signal="body_entered" from="DeathPlane" to="." method="_on_death_plane_body_entered"]
