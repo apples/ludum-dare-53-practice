@@ -2,7 +2,7 @@ extends Node2D
 signal gun_power_up_collected()
 @onready var lives_label: Label = %LivesLabel
 @onready var score_label: Label = %ScoreLabel
-var new_ball: CharacterBody2D
+var balls: Array[CharacterBody2D]
 var ball_scene = preload("res://Objects/Ball/ball.tscn")
 var block_scene = preload("res://Objects/Block/block.tscn")
 var power_up_scene = preload("res://Objects/PowerUp/power_up.tscn")
@@ -48,16 +48,21 @@ func row_pattern():
 		return row_pattern
 		
 func reset_ball():
-	new_ball = ball_scene.instantiate()
+	var new_ball = ball_scene.instantiate()
+	balls.append(new_ball)
 	var ball_pos = Vector2(600, 300)
 	new_ball.set_position(ball_pos)
 	self.add_child(new_ball)
+	total_balls = 0
 	total_balls += 1
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if number_of_blocks == 0:
-		new_ball.queue_free()
+		for ball in balls:
+			ball.queue_free()
+		
+		balls = []
 		load_level()
 		
 func load_level():
@@ -94,6 +99,7 @@ func _on_power_up_collected(power_up_pos, power_type):
 	
 func multi_power_up(power_up_pos):
 	var extra_ball = ball_scene.instantiate()
+	balls.append(extra_ball)
 	extra_ball.from_power_up = true
 	var ball_pos = power_up_pos
 	ball_pos.y -= 15
