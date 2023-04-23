@@ -21,7 +21,7 @@ func render_blocks():
 	for j in range(5):
 		block_position.y += 50
 		block_position.x = 100
-		row_pattern = row_pattern()
+		row_pattern = create_row_pattern()
 		var row_pattern_reversed = row_pattern.duplicate()
 		row_pattern_reversed.reverse()
 		row_pattern.append_array(row_pattern_reversed)
@@ -34,7 +34,7 @@ func render_blocks():
 				number_of_blocks += 1
 			block_position.x += 105
 
-func row_pattern():
+func create_row_pattern():
 	var row_pattern = []
 	for i in range(5):
 		if coin_flip() == 1:
@@ -43,7 +43,7 @@ func row_pattern():
 			row_pattern.push_back(false)
 			
 	if !row_pattern.has(true):
-		return row_pattern()
+		return create_row_pattern()
 	else:
 		return row_pattern
 		
@@ -52,12 +52,12 @@ func reset_ball():
 	balls.append(new_ball)
 	var ball_pos = Vector2(600, 300)
 	new_ball.set_position(ball_pos)
-	self.add_child(new_ball)
+	self.call_deferred("add_child", new_ball)
 	total_balls = 0
 	total_balls += 1
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if number_of_blocks == 0:
 		for ball in balls:
 			ball.queue_free()
@@ -81,7 +81,7 @@ func _on_block_destroyed(block_pos):
 		var power_up: CharacterBody2D = power_up_scene.instantiate()
 		power_up.power_up_collected.connect(_on_power_up_collected)
 		power_up.set_position(block_pos)
-		self.add_child(power_up)
+		self.call_deferred("add_child", power_up)
 
 func _on_death_plane_body_entered(body):
 	if body.is_in_group("Balls"):
@@ -109,5 +109,5 @@ func multi_power_up(power_up_pos):
 	var ball_pos = power_up_pos
 	ball_pos.y -= 15
 	extra_ball.set_position(ball_pos)
-	self.add_child(extra_ball)
+	self.call_deferred("add_child", extra_ball)
 	total_balls += 1

@@ -10,7 +10,7 @@ func _ready():
 	var direction = Vector2(directionX, directionY)
 	velocity = direction * SPEED
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	move_and_slide()
 
 func _on_area_2d_body_entered(body):
