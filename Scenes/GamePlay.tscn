@@ -48,9 +48,8 @@ shape = SubResource("RectangleShape2D_3wnsy")
 
 [node name="Paddle" parent="." instance=ExtResource("2_rcsaq")]
 
-[node name="Ball" parent="." instance=ExtResource("3_7qeyh")]
-position = Vector2(593, 311)
-scale = Vector2(2, 2)
+[node name="Ball" parent="." groups=["Balls"] instance=ExtResource("3_7qeyh")]
+position = Vector2(588, 316)
 
 [node name="BlockContainer" type="Node2D" parent="."]
 
