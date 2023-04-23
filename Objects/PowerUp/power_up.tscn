@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b0gxnw5k1gqiu"]
 
 [ext_resource type="Script" path="res://Objects/PowerUp/power_up.gd" id="1_gm2ya"]
-[ext_resource type="Texture2D" uid="uid://dgpi4sn1kurfi" path="res://assets/block1.png" id="1_nsact"]
+[ext_resource type="Texture2D" uid="uid://mki580iu6vdh" path="res://assets/power_up_multi.png" id="2_2s27e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fgftx"]
 size = Vector2(72, 24)
@@ -12,7 +12,7 @@ script = ExtResource("1_gm2ya")
 [node name="PowerUpSprite" type="Sprite2D" parent="."]
 texture_filter = 1
 scale = Vector2(4, 4)
-texture = ExtResource("1_nsact")
+texture = ExtResource("2_2s27e")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_fgftx")

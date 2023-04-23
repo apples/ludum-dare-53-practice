@@ -1,9 +1,13 @@
 extends CharacterBody2D
+var from_power_up = false
 
 const SPEED = 300
 
 func _ready():
-	$Timer.start()
+	if from_power_up:
+		set_ball_props()
+	else:
+		$Timer.start()
 	$Sprite.play("idle")
 
 func _physics_process(delta):
@@ -26,10 +30,13 @@ func _physics_process(delta):
 			block.hit()
 			# add points
 
-func _on_timer_timeout():
-	# Refresh the seed.
+func set_ball_props():
 	randomize()
 	var directionX = randf_range(-1, 1)
 	var directionY = 1 #randf_range(0.1, 1)
 	var direction = Vector2(directionX, directionY)
 	velocity = direction * SPEED
+
+func _on_timer_timeout():
+	# Refresh the seed.
+	set_ball_props()

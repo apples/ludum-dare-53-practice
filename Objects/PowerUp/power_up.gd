@@ -13,5 +13,5 @@ func _physics_process(delta):
 
 func _on_area_2d_body_entered(body):
 	if body.name == "Paddle":
-		power_up_collected.emit()
+		power_up_collected.emit(self.get_position())
 		self.queue_free()
