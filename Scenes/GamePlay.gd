@@ -1,4 +1,6 @@
 extends Node2D
+@onready var lives_label: Label = %LivesLabel
+
 var block_scene = preload("res://Objects/Block/block.tscn")
 var number_of_blocks: int = 0
 
@@ -20,7 +22,7 @@ func render_blocks():
 			var block: CharacterBody2D = block_scene.instantiate()
 			block.set_position(block_position)
 			if row_pattern[i]:
-				self.add_child(block)
+				$BlockContainer.add_child(block)
 				number_of_blocks += 1
 			block_position.x += 105
 
@@ -37,6 +39,8 @@ func row_pattern():
 	else:
 		return row_pattern
 		
+func reset_ball():
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -46,6 +50,9 @@ func _process(delta):
 func coin_flip():
 	return randi_range(0, 1)
 
-
 func _on_ball_block_destroyed():
 	number_of_blocks -= 1
+
+func _on_death_plane_body_entered(body):
+	if body.name == "Ball":
+		lives_label.text = "Lives: 2"
