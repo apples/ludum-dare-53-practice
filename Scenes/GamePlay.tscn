@@ -78,4 +78,6 @@ position = Vector2(35.9375, 40.75)
 scale = Vector2(51.0839, -1.21869)
 shape = SubResource("RectangleShape2D_3wnsy")
 
+[node name="Timer" type="Timer" parent="."]
+
 [connection signal="body_entered" from="DeathPlane" to="." method="_on_death_plane_body_entered"]

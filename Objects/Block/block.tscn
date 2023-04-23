@@ -15,5 +15,6 @@ scale = Vector2(4, 4)
 shape = SubResource("RectangleShape2D_ev0ls")
 
 [node name="AnimatedBlock" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
 scale = Vector2(4, 4)
 sprite_frames = ExtResource("2_7to06")

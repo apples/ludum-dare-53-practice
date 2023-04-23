@@ -8,6 +8,7 @@ var power_up_scene = preload("res://Objects/PowerUp/power_up.tscn")
 var number_of_blocks: int = 0
 var lives: int = 3
 var score: int = 0
+var total_balls: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -50,6 +51,7 @@ func reset_ball():
 	var ball_pos = Vector2(600, 300)
 	new_ball.set_position(ball_pos)
 	self.add_child(new_ball)
+	total_balls += 1
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -68,12 +70,26 @@ func _on_block_destroyed(block_pos):
 	number_of_blocks -= 1
 	score += 50
 	score_label.text = "Score: %s" %[str(score)]
-	var power_up: CharacterBody2D = power_up_scene.instantiate()
-	power_up.set_position(block_pos)
-	self.add_child(power_up)
+	var chance_drop = randi_range(0, 2)
+	if chance_drop == 2:
+		var power_up: CharacterBody2D = power_up_scene.instantiate()
+		power_up.power_up_collected.connect(_on_power_up_collected)
+		power_up.set_position(block_pos)
+		self.add_child(power_up)
 
 func _on_death_plane_body_entered(body):
 	if body.is_in_group("Balls"):
-		lives -= 1
-		lives_label.text = "Lives: %s" %[str(lives)]
-		reset_ball()
+		total_balls -= 1
+		if total_balls == 0:
+			lives -= 1
+			lives_label.text = "Lives: %s" %[str(lives)]
+			reset_ball()
+
+func _on_power_up_collected(power_up_pos):
+	var extra_ball = ball_scene.instantiate()
+	extra_ball.from_power_up = true
+	var ball_pos = power_up_pos
+	ball_pos.y -= 15
+	extra_ball.set_position(ball_pos)
+	self.add_child(extra_ball)
+	total_balls += 1

@@ -1,5 +1,6 @@
 extends CharacterBody2D
-const SPEED = 300.0
+signal power_up_collected()
+const SPEED = 150
 
 func _ready():
 	var directionX = 0
@@ -12,4 +13,5 @@ func _physics_process(delta):
 
 func _on_area_2d_body_entered(body):
 	if body.name == "Paddle":
+		power_up_collected.emit(self.get_position())
 		self.queue_free()
