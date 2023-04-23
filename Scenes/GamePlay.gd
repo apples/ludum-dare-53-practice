@@ -1,10 +1,12 @@
 extends Node2D
 @onready var lives_label: Label = %LivesLabel
+@onready var score_label: Label = %ScoreLabel
 var new_ball: CharacterBody2D
 var ball_scene = preload("res://Objects/Ball/ball.tscn")
 var block_scene = preload("res://Objects/Block/block.tscn")
 var number_of_blocks: int = 0
 var lives: int = 3
+var score: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -63,6 +65,8 @@ func coin_flip():
 
 func _on_block_destroyed():
 	number_of_blocks -= 1
+	score += 50
+	score_label.text = "Score: %s" %[str(score)]
 
 func _on_death_plane_body_entered(body):
 	if body.is_in_group("Balls"):

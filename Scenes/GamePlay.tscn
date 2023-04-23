@@ -29,11 +29,25 @@ stretch_mode = 1
 
 [node name="BlockContainer" type="Node2D" parent="."]
 
+[node name="ScoreLabel" type="Label" parent="."]
+unique_name_in_owner = true
+texture_filter = 1
+offset_left = 6.0
+offset_top = -2.0
+offset_right = 63.0
+offset_bottom = 24.0
+scale = Vector2(4, 4)
+theme_override_fonts/font = ExtResource("4_0121d")
+theme_override_font_sizes/font_size = 19
+text = "Score: 0"
+
 [node name="LivesLabel" type="Label" parent="."]
 unique_name_in_owner = true
 texture_filter = 1
-offset_right = 57.0
-offset_bottom = 26.0
+offset_left = 8.0
+offset_top = 53.0
+offset_right = 65.0
+offset_bottom = 79.0
 scale = Vector2(4, 4)
 theme_override_fonts/font = ExtResource("4_0121d")
 theme_override_font_sizes/font_size = 19
