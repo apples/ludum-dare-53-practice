@@ -1,4 +1,5 @@
 extends Node2D
+signal gun_power_up_collected()
 @onready var lives_label: Label = %LivesLabel
 @onready var score_label: Label = %ScoreLabel
 var new_ball: CharacterBody2D
@@ -85,7 +86,13 @@ func _on_death_plane_body_entered(body):
 			lives_label.text = "Lives: %s" %[str(lives)]
 			reset_ball()
 
-func _on_power_up_collected(power_up_pos):
+func _on_power_up_collected(power_up_pos, power_type):
+	if power_type == 1:
+		multi_power_up(power_up_pos)
+	else:
+		gun_power_up_collected.emit()
+	
+func multi_power_up(power_up_pos):
 	var extra_ball = ball_scene.instantiate()
 	extra_ball.from_power_up = true
 	var ball_pos = power_up_pos

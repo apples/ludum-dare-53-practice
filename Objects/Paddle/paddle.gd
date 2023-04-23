@@ -1,5 +1,6 @@
 extends CharacterBody2D
-
+var base_paddle = preload("res://assets/Paddle .png")
+var gun = preload("res://assets/gun_up.png")
 
 const SPEED = 600.0
 
@@ -14,3 +15,7 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
+
+
+func _on_game_play_gun_power_up_collected():
+	$GunUpSprite.visible = true

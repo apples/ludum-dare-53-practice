@@ -80,4 +80,5 @@ shape = SubResource("RectangleShape2D_3wnsy")
 
 [node name="Timer" type="Timer" parent="."]
 
+[connection signal="gun_power_up_collected" from="." to="Paddle" method="_on_game_play_gun_power_up_collected"]
 [connection signal="body_entered" from="DeathPlane" to="." method="_on_death_plane_body_entered"]
