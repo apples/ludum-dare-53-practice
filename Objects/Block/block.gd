@@ -6,4 +6,4 @@ func hit():
 		$AnimatedBlock.frame += 1
 	else:
 		self.queue_free()
-		block_destroyed.emit()
+		block_destroyed.emit(self.get_position())
