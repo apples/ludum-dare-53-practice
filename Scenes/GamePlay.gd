@@ -1,13 +1,13 @@
 extends Node2D
 @onready var lives_label: Label = %LivesLabel
+var new_ball: CharacterBody2D
 var ball_scene = preload("res://Objects/Ball/ball.tscn")
 var block_scene = preload("res://Objects/Block/block.tscn")
 var number_of_blocks: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	render_blocks()
-	reset_ball()
+	load_level()
 	
 func render_blocks():
 	var block_position = Vector2(100, 0)
@@ -41,7 +41,7 @@ func row_pattern():
 		return row_pattern
 		
 func reset_ball():
-	var new_ball: CharacterBody2D = ball_scene.instantiate()
+	new_ball = ball_scene.instantiate()
 	var ball_pos = Vector2(600, 300)
 	new_ball.set_position(ball_pos)
 	new_ball.block_destroyed.connect(_on_ball_block_destroyed)
@@ -50,7 +50,12 @@ func reset_ball():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if number_of_blocks == 0:
-		render_blocks()
+		new_ball.queue_free()
+		load_level()
+		
+func load_level():
+	render_blocks()
+	reset_ball()
 
 func coin_flip():
 	return randi_range(0, 1)
