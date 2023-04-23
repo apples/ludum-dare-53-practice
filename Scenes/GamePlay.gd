@@ -10,7 +10,7 @@ var number_of_blocks: int = 0
 var lives: int = 3
 var score: int = 0
 var total_balls: int = 0
-
+var main_menu_scene = "res://Scenes/main_menu.tscn"
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	load_level()
@@ -88,8 +88,13 @@ func _on_death_plane_body_entered(body):
 		total_balls -= 1
 		if total_balls == 0:
 			lives -= 1
-			lives_label.text = "Lives: %s" %[str(lives)]
-			reset_ball()
+			if lives == 0:
+				get_tree().change_scene_to_file(main_menu_scene)
+				if score > HighscoreManager.highscore:
+					HighscoreManager.highscore = score
+			else:
+				lives_label.text = "Lives: %s" %[str(lives)]
+				reset_ball()
 
 func _on_power_up_collected(power_up_pos, power_type):
 	if power_type == 1:

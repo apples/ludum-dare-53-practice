@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="Ludum Dare 53 Practice"
-run/main_scene="res://Scenes/GamePlay.tscn"
+run/main_scene="res://Scenes/main_menu.tscn"
 config/features=PackedStringArray("4.0", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+HighscoreManager="*res://Globals/highscore_manager.gd"
 
 [display]
 
