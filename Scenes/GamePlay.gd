@@ -20,9 +20,10 @@ func render_blocks():
 		row_pattern_reversed.reverse()
 		row_pattern.append_array(row_pattern_reversed)
 		for i in range(10):
-			var block: CharacterBody2D = block_scene.instantiate()
-			block.set_position(block_position)
 			if row_pattern[i]:
+				var block: CharacterBody2D = block_scene.instantiate()
+				block.block_destroyed.connect(_on_block_destroyed)
+				block.set_position(block_position)
 				$BlockContainer.add_child(block)
 				number_of_blocks += 1
 			block_position.x += 105
@@ -44,7 +45,6 @@ func reset_ball():
 	new_ball = ball_scene.instantiate()
 	var ball_pos = Vector2(600, 300)
 	new_ball.set_position(ball_pos)
-	new_ball.block_destroyed.connect(_on_ball_block_destroyed)
 	self.add_child(new_ball)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -60,7 +60,7 @@ func load_level():
 func coin_flip():
 	return randi_range(0, 1)
 
-func _on_ball_block_destroyed():
+func _on_block_destroyed():
 	number_of_blocks -= 1
 
 func _on_death_plane_body_entered(body):

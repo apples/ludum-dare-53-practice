@@ -1,5 +1,4 @@
 extends CharacterBody2D
-signal block_destroyed()
 
 const SPEED = 300
 
@@ -24,8 +23,7 @@ func _physics_process(delta):
 				velocity.x = ratio * 8
 		if lastSlideCollision.get_collider().is_in_group("Blocks"):
 			var block: Node = lastSlideCollision.get_collider()
-			block.queue_free()
-			block_destroyed.emit()
+			block.hit()
 			# add points
 
 func _on_timer_timeout():

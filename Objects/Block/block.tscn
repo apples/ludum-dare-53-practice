@@ -1,18 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://hwsxfp8fm7n1"]
+[gd_scene load_steps=4 format=3 uid="uid://hwsxfp8fm7n1"]
 
-[ext_resource type="Texture2D" uid="uid://dgpi4sn1kurfi" path="res://assets/block1.png" id="1_jrg8d"]
+[ext_resource type="Script" path="res://Objects/Block/block.gd" id="1_fhixj"]
+[ext_resource type="SpriteFrames" uid="uid://dgtfw20lxbgd6" path="res://Objects/Block/block_sprite_frames.tres" id="2_7to06"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ev0ls"]
 size = Vector2(19.75, 8)
 
 [node name="Block" type="CharacterBody2D" groups=["Blocks"]]
-
-[node name="Block1" type="Sprite2D" parent="."]
-texture_filter = 1
-scale = Vector2(4, 4)
-texture = ExtResource("1_jrg8d")
+script = ExtResource("1_fhixj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 0)
 scale = Vector2(4, 4)
 shape = SubResource("RectangleShape2D_ev0ls")
+
+[node name="AnimatedBlock" type="AnimatedSprite2D" parent="."]
+scale = Vector2(4, 4)
+sprite_frames = ExtResource("2_7to06")
