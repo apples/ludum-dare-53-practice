@@ -1,3 +1,10 @@
-[gd_scene format=3 uid="uid://mtiui4ot4rpw"]
+[gd_scene load_steps=2 format=3 uid="uid://mtiui4ot4rpw"]
+
+[ext_resource type="AudioStream" uid="uid://buu8c36hwjm8t" path="res://assets/breakoutdemo.ogg" id="1_dubu6"]
 
 [node name="BGMusic" type="Node2D"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_dubu6")
+autoplay = true
+bus = &"BGM"

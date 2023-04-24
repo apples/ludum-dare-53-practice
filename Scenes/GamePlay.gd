@@ -29,6 +29,7 @@ func render_blocks():
 			if row_pattern[i]:
 				var block: CharacterBody2D = block_scene.instantiate()
 				block.block_destroyed.connect(_on_block_destroyed)
+				block.armor_hit.connect(_on_block_armor_hit)
 				block.set_position(block_position)
 				$BlockContainer.add_child(block)
 				number_of_blocks += 1
@@ -72,7 +73,12 @@ func load_level():
 func coin_flip():
 	return randi_range(0, 1)
 
+func _on_block_armor_hit():
+	$BlockHitSFX.play()
+	
+	
 func _on_block_destroyed(block_pos):
+	$BlockDeathSFX.play()
 	number_of_blocks -= 1
 	score += 50
 	score_label.text = "Score: %s" %[str(score)]
@@ -97,6 +103,7 @@ func _on_death_plane_body_entered(body):
 				reset_ball()
 
 func _on_power_up_collected(power_up_pos, power_type):
+	$PowerUpGainSFX.play()
 	if power_type == 1:
 		multi_power_up(power_up_pos)
 	else:
