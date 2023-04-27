@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dgn43xxtbi1bk"]
+
+[ext_resource type="Script" path="res://Scenes/linetest/high_velocity_armor_piercing_bullet.gd" id="1_20s5e"]
+
+[node name="high_velocity_armor_piercing_bullet" type="Polygon2D"]
+scale = Vector2(0.240852, 0.240852)
+polygon = PackedVector2Array(0, -1, 1, 0, 0, 1, -1, 0)
+script = ExtResource("1_20s5e")

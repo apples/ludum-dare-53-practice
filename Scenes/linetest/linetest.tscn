@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3jrq5arqmbx3"]
+
+[ext_resource type="Script" path="res://Scenes/linetest/linetest.gd" id="1_jxlng"]
+[ext_resource type="Texture2D" uid="uid://bw8s6x8dbuyr7" path="res://icon.svg" id="2_j8v4p"]
+
+[sub_resource type="Gradient" id="Gradient_fta5u"]
+colors = PackedColorArray(1, 0, 1, 1, 1, 1, 0, 1)
+
+[node name="Node2D" type="Node2D"]
+scale = Vector2(50, 50)
+script = ExtResource("1_jxlng")
+
+[node name="Cannon" type="Line2D" parent="."]
+points = PackedVector2Array(11.5, 6.5, 6.42, 3.86)
+width = 0.15
+gradient = SubResource("Gradient_fta5u")
+
+[node name="Polygon2D" type="Polygon2D" parent="Cannon"]
+position = Vector2(5.04, 2.02)
+color = Color(1, 0, 1, 1)
+polygon = PackedVector2Array(6.4, 4.64, 6.52, 4.64, 6.62, 4.54, 6.62, 4.42, 6.52, 4.32, 6.4, 4.32, 6.3, 4.42, 6.3, 4.54)
+
+[node name="Goblin" type="Sprite2D" parent="."]
+position = Vector2(4.53998, 6.35999)
+scale = Vector2(0.00937503, 0.00937503)
+texture = ExtResource("2_j8v4p")
+
+[node name="Label" type="RichTextLabel" parent="Goblin"]
+offset_left = -64.0
+offset_top = 64.0
+offset_right = 230.0
+offset_bottom = 155.0
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+text = "0"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
